@@ -1,0 +1,14 @@
+[
+    {
+        "key": "truthfulqa",
+        "dataset": "data/omniubench/data.jsonl",
+        "data_root": "data/omniubench",
+        "source": "truthfulQA"
+    },
+    {
+        "key": "vlguard",
+        "dataset": "data/omniubench/data.jsonl",
+        "data_root": "data/omniubench",
+        "source": "vlguard"
+    }
+]
