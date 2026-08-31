@@ -1,12 +1,9 @@
-# Omni-UBench
+# Omni-modal Safety Guardrail Evaluation
 
-The official repository of "Omni-UBench: Benchmarking Omni-Modal LLM-based Guardrails Across Safety, Utility, and Reliability".
-**Omni-UBench** is a comprehensive framework for systematically evaluating omni-modal guardrails across *safety, utility and reliability*.
+This repo provid a comprehensive framework for systematically evaluating omni-modal guardrails (content moderation/input filtering) across *safety, utility and reliability*.
 
 > [!CAUTION]
-> Harmful Content Disclaimer:
-> This project involves safety benchmarks that may contain harmful, disturbing, or offensive examples.
-> These data are provided strictly for safety research and guardrail development.
+> Harmful Content Disclaimer: This project involves safety benchmarks that may contain harmful, disturbing, or offensive examples. These data are provided strictly for safety research and guardrail development.
 
 ## Quick Start
 
@@ -27,9 +24,9 @@ bash env_setup.sh
 
 ### Benchmark Preparation [Required]
 
-The full **Omni-UBench** consists of 183K+ samples collected from 35+ publicly available datasets, covering diverse modalities, risk categories, and safety evaluation scenarios.
+The full benchmark consists of 183K+ samples collected from 35+ publicly available datasets, covering diverse modalities, risk categories, and safety evaluation scenarios.
 
-Due to the repository size limitation (50 MB), we only include a **preview (Mini) version of Omni-UBench** in this path (data/omniubench.zip). Unzip it before inference.
+Due to the repository size limitation (50 MB), we only include a **preview (Mini) version** in the data path (data/omniubench.zip). Unzip it before inference.
 
 ```bash
 unzip data/omniubench.zip -d data/omniubench
@@ -37,7 +34,7 @@ unzip data/omniubench.zip -d data/omniubench
 
 The mini version provides a randomly sampled subset of the benchmark, enabling users to quickly test the evaluation pipeline. (Complete benchmark will be released soon!)
 
-Meanwhile, we provide a step-by-step dataset construction pipeline to facilitate full benchmark reproduction. By downloading the corresponding publicly available datasets and executing the provided scripts, users can automatically build Omni-UBench, and use it with our provided library modules.
+Meanwhile, we provide a step-by-step dataset construction pipeline to facilitate full benchmark reproduction. By downloading the corresponding publicly available datasets and executing the provided scripts, users can automatically build it, and use it with our provided library modules.
 
 ### Prepare OLLMs/Guardrails [Required]
 
@@ -51,7 +48,7 @@ bash prepare_guardrails_hf.sh
 
 ### A Quick Inference Example
 
-The script loads a base Omni model (Qwen2.5-Omni-7B) and runs some test cases based on the mini-version of Omni-UBench. By default the script filter queries from a data source (e.g., TruthfulQA). Be free to check and modify the data source to be evaluated!
+The script loads a base Omni model (Qwen2.5-Omni-7B) and runs some test cases based on the mini-version benchmark. By default the script filter queries from a data source (e.g., TruthfulQA). Be free to check and modify the data source to be evaluated!
 
 ```bash
 python inference_example.py
@@ -83,7 +80,7 @@ bash prepare_omniubench_external.sh
 
 ### Data Sources
 
-Omni-UBench is constructed by integrating publicly available safety and evaluation datasets across different modalities. The following table lists all benchmark sources supported by Omni-UBench.
+This framework is constructed by integrating publicly available safety and evaluation datasets across different modalities. The following table lists all benchmark sources supported.
 
 | Modality | Source            | Repo ID                                                    |
 | :------: | :---------------- | :--------------------------------------------------------- |
@@ -140,7 +137,7 @@ CUDA_VISIBLE_DEVICES=0 python eval_omniguard_sft_all.py \
 DATA_DIR=/path/to/data CUDA_VISIBLE_DEVICES=0 python eval_omniguard_sft_all.py --model_path ./models/base/Qwen2.5-Omni-7B --enable_vllm
 ```
 
-Omni-UBench adopts a multi-dimensional evaluation protocol (Safety-Utility-Reliability),
+We adopts a multi-dimensional evaluation protocol (Safety-Utility-Reliability),
 and datasets are grouped accordingly for target-oriented evaluation:
 
 - safety: includes basic safety and jailbreak defense (detecting malicious queries and jailbreak samples)
@@ -193,4 +190,4 @@ The above dataset name is formatted as 'modality'.'data_source_key', modality sh
 python -m baseline.bsl_openai --batch_config data/infer.json --api_key <your-api-key> --base_url https://api.xiaomimimo.com/v1
 ```
 
-The above config file `data/infer.json` defines the evaluated sources of Omni-UBench, and it can be modified accordingly. See `baseline/bsl_openai.py` and `baseline/bsl_openrouter.py` for more details.
+The above config file `data/infer.json` defines the evaluated sources, and it can be modified accordingly. See `baseline/bsl_openai.py` and `baseline/bsl_openrouter.py` for more details.

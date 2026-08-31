@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         # For modality-bias evaluation
         # Note that this dataset contains only a subset, we provide a anyonmous download link in the README for full download 
-        # "mb": eval_custom_modality, 
+        "mb": eval_custom_modality, 
 
         # For False-Rejection to text short-cuts
         # "fr": eval_false_reject,
